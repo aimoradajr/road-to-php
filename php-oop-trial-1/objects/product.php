@@ -41,5 +41,19 @@
                 return false;
             }
         }
+
+        public function readPart($start_offset,$row_num){
+            $query = "select id,name,description,price,category_id from ".$this->table_name." order by name asc
+                limit $start_offset, $row_num";
+
+            $res = $this->dbconn->query($query);
+
+            return $res;
+        }
+
+        public function totalRows() {
+            $res = $this->dbconn->query("select id from {$this->table_name}");
+            return $res->num_rows;
+        }
     }
 ?>

@@ -4,8 +4,8 @@
         private $dbconn;
         private $table_name = 'categories';
 
-        private $id;
-        private $name;
+        public $id;
+        public $name;
         
         public function __construct($dbconn){
             $this->dbconn = $dbconn;
@@ -18,7 +18,13 @@
             return $res;
         }
 
-        public function readName()
+        public function setID($id)
+        {
+            $this->id = $id;
+            $this->readName();
+        }
+
+        private function readName()
         {
             // use this to set name of cat
             $res = $this->dbconn->query("select name from $this->table_name where id=$this->id");

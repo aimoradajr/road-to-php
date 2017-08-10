@@ -3,7 +3,7 @@
         private $server = 'localhost';
         private $username = 'temptemp';
         private $password = 'temptemp';
-        private $db_name = 'php-oop-trial-1';
+        private $db_name = 'php-oop';
         public $conn;
 
         public function getConnection() {
