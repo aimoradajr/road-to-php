@@ -17,6 +17,24 @@
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+<script>
+    $('.delete-btn').click(function (){
+        $(this).data('id')
+
+        $.post('delete_product.php', {
+            product_id: $(this).data('id')
+        },
+        function (data)
+        {
+            console.log(data)
+            alert('Delete Success')
+            location.reload()
+        }).fail(function(){
+            alert('Delete Fail')
+        })
+    })
+</script>
  
 </body>
 </html>

@@ -42,7 +42,7 @@
     
     // button for last page
     if($page<$total_pages){
-        echo "<li><a href='" .$page_url. "page={$total_pages}' title='Last page is {$total_pages}.'>";
+        echo "<li><a href='" .$page_url. "?page={$total_pages}' title='Last page is {$total_pages}.'>";
             echo ">>";
         echo "</a></li>";
     }

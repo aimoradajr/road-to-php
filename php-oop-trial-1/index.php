@@ -50,9 +50,9 @@ https://www.codeofaninja.com/2014/06/php-object-oriented-crud-example-oop.html
                 echo "<td>" . $category->name . "</td>";
 
                 echo '<td>';
-                echo "<a href='read_one_product.php?id={$row['id']}' class='btn btn-default btn-md'>Read</a>";
-                echo "<a href='update_product.php?id={$row['id']}' class='btn btn-default btn-md'>Edit</a>";
-                echo "<a href='delete_product.php?id={$row['id']}' class='btn btn-default btn-md'>Delete</a>";
+                echo "<a href='read_one_product.php?id={$row['id']}' class='btn btn-primary btn-md left-margin'>Read</a>";
+                echo "<a href='update_product.php?id={$row['id']}' class='btn btn-info btn-md left-margin'>Edit</a>";
+                echo "<a data-id='{$row['id']}' class='btn btn-danger btn-md left-margin delete-btn'>Delete</a>";
                 echo '</td>';
 
                 echo '</tr>';

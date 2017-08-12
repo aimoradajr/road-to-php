@@ -51,9 +51,42 @@
             return $res;
         }
 
+        public function readOne()
+        {
+            $query = "select id,name,description,price,category_id from ".$this->table_name." where id={$this->id}";
+
+            $res = $this->dbconn->query($query);
+
+            $row = $res->fetch_assoc();
+            $this->name = $row['name'];
+            $this->description = $row['description'];
+            $this->price = $row['price'];
+            $this->category_id = $row['category_id'];
+        }
+
         public function totalRows() {
             $res = $this->dbconn->query("select id from {$this->table_name}");
             return $res->num_rows;
+        }
+
+        public function update()
+        {
+            $query = "update {$this->table_name} set 
+                name='{$this->name}',
+                description='{$this->description}',
+                price={$this->price},
+                category_id={$this->category_id} 
+                where id={$this->id}";
+
+                echo '<br/>';
+            echo $query;
+            echo '<br/>';
+
+            return $this->dbconn->query($query);
+        }
+
+        public function delete(){
+            return $this->dbconn->query("delete from {$this->table_name} where id={$this->id}");
         }
     }
 ?>
