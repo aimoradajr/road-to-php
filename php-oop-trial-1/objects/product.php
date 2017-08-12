@@ -88,5 +88,49 @@
         public function delete(){
             return $this->dbconn->query("delete from {$this->table_name} where id={$this->id}");
         }
+
+        // read products by search term
+        public function search($search_term, $from_record_num, $records_per_page){
+        
+            // select query
+            $query = "SELECT
+                        c.name as category_name, p.id, p.name, p.description, p.price, p.category_id, p.created
+                    FROM
+                        " . $this->table_name . " p
+                        LEFT JOIN
+                            categories c
+                                ON p.category_id = c.id
+                    WHERE
+                        p.name LIKE '{$search_term}' OR p.description LIKE '{$search_term}'
+                    ORDER BY
+                        p.name ASC
+                    LIMIT
+                        $from_record_num, $records_per_page";
+        
+            return  $this->dbconn->query( $query );
+        }
+        
+
+
+        
+        public function countAll_BySearch($search_term){
+        
+            // select query
+            $query = "SELECT
+                        COUNT(*) as total_rows
+                    FROM
+                        " . $this->table_name . " p
+                        LEFT JOIN
+                            categories c
+                                ON p.category_id = c.id
+                    WHERE
+                        p.name LIKE '$search_term'";
+        
+            $ret = $this->dbconn->query( $query );
+        
+            $row = $ret->fetch_assoc();
+        
+            return $row['total_rows'];
+        }
     }
 ?>
