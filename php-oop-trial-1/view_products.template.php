@@ -19,13 +19,14 @@
 <div>
     <table class="table table-default table-bordered">
         <thead>
-            <th>Name</th><th>Description</th><th>Price</th><th>Category</th><th>Actions</th>
+            <th>Image</th><th>Name</th><th>Description</th><th>Price</th><th>Category</th><th>Actions</th>
         </thead>
         <tbody>
             <?php while($row = $the_products->fetch_assoc()){
                 $category->setID($row['category_id']);
 
                 echo '<tr>';
+                echo "<td> <img src='uploads/{$row['image']}' style='height:30px;width:30px' </td>";
                 echo "<td>" . $row['name'] . "</td>";
                 echo "<td>" . $row['description'] . "</td>";
                 echo "<td>" . $row['price'] . "</td>";

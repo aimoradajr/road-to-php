@@ -28,9 +28,14 @@
         $product->price = $_POST['price'];
         $product->category_id = $_POST['category_id'];
 
+        // the image
+        $image = !empty($_FILES['image']['name']) ? sha1_file($_FILES['image']['tmp_name']) . '-' . basename($_FILES['image']['name'])  : "";
+        $product->image = $image;
+
         if($product->update())
         {
             echo 'successfully updated.';
+            echo $product->uploadPhoto();
         }
         else
         {
@@ -48,7 +53,7 @@
     <a href='index.php' class='btn btn-default pull-right'>Read Products</a>
 </div>
 
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id={$product->id}");?>" method="post">
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id={$product->id}");?>" method="post" enctype="multipart/form-data">
     <table class='table table-hover table-responsive table-bordered'>
  
         <tr>
@@ -61,6 +66,11 @@
             <td><input type='text' name='price' value='<?php echo $product->price; ?>' class='form-control' /></td>
         </tr>
  
+        <tr>
+            <td>Image</td>
+            <td><input type="file" name="image"/></td>
+        </tr>
+
         <tr>
             <td>Description</td>
             <td><textarea name='description' class='form-control'><?php echo $product->description; ?></textarea></td>
@@ -79,9 +89,9 @@
                         while($row = $cat_rows->fetch_assoc())
                         {
                             if($row['id']==$product->category_id)
-                                echo "<option selected>".$row['name']."</option>";
+                                echo "<option value='{$row['id']}' selected>".$row['name']."</option>";
                             else
-                                echo "<option>".$row['name']."</option>";
+                                echo "<option value='{$row['id']}'>".$row['name']."</option>";
                         }
 
                     echo '</select>';
